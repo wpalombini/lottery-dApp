@@ -1,0 +1,20 @@
+body {
+  background-color: #ddd !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/*Material UI overrides*/
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+}
+button {
+  text-transform: none !important;
+}
