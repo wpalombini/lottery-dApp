@@ -1,0 +1,273 @@
+{
+  "contractName": "ILotteryContract",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "fulfillRandomNumber",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"fulfillRandomNumber\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Workspace/dev/lottery-dApp/src/contracts/interfaces/ILotteryContract.sol\":\"ILotteryContract\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Workspace/dev/lottery-dApp/src/contracts/interfaces/ILotteryContract.sol\":{\"keccak256\":\"0xb57cf418788b72ec1b44894dc1ddf5228f49f8f5106816c496ee60c79108609a\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://704f1872f980bdb4663dd8090bafe0d573f8e4896a238c490b576a784c3977c8\",\"dweb:/ipfs/QmYm7jRqHSCVEpfvTNjZvb4RALBytZ9YSboFdnHseCFx4u\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity >=0.4.22 <0.8.0;\r\n\r\ninterface ILotteryContract {\r\n    function fulfillRandomNumber(uint) external;\r\n}",
+  "sourcePath": "C:\\Workspace\\dev\\lottery-dApp\\src\\contracts\\interfaces\\ILotteryContract.sol",
+  "ast": {
+    "absolutePath": "/C/Workspace/dev/lottery-dApp/src/contracts/interfaces/ILotteryContract.sol",
+    "exportedSymbols": {
+      "ILotteryContract": [
+        919
+      ]
+    },
+    "id": 920,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 913,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "40:32:5"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 919,
+        "linearizedBaseContracts": [
+          919
+        ],
+        "name": "ILotteryContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "f78da08a",
+            "id": 918,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fulfillRandomNumber",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 916,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 915,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 918,
+                  "src": "139:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 914,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "139:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "138:6:5"
+            },
+            "returnParameters": {
+              "id": 917,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "153:0:5"
+            },
+            "scope": 919,
+            "src": "110:44:5",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 920,
+        "src": "76:81:5"
+      }
+    ],
+    "src": "40:117:5"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/C/Workspace/dev/lottery-dApp/src/contracts/interfaces/ILotteryContract.sol",
+      "exportedSymbols": {
+        "ILotteryContract": [
+          919
+        ]
+      },
+      "license": "UNLICENSED"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".22",
+            "<",
+            "0.8",
+            ".0"
+          ]
+        },
+        "id": 913,
+        "name": "PragmaDirective",
+        "src": "40:32:5"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            919
+          ],
+          "name": "ILotteryContract",
+          "scope": 920
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "functionSelector": "f78da08a",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "fulfillRandomNumber",
+              "overrides": null,
+              "scope": 919,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 918,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 914,
+                        "name": "ElementaryTypeName",
+                        "src": "139:4:5"
+                      }
+                    ],
+                    "id": 915,
+                    "name": "VariableDeclaration",
+                    "src": "139:4:5"
+                  }
+                ],
+                "id": 916,
+                "name": "ParameterList",
+                "src": "138:6:5"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 917,
+                "name": "ParameterList",
+                "src": "153:0:5"
+              }
+            ],
+            "id": 918,
+            "name": "FunctionDefinition",
+            "src": "110:44:5"
+          }
+        ],
+        "id": 919,
+        "name": "ContractDefinition",
+        "src": "76:81:5"
+      }
+    ],
+    "id": 920,
+    "name": "SourceUnit",
+    "src": "40:117:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2021-03-19T00:08:27.921Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
