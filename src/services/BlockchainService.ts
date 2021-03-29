@@ -1,6 +1,13 @@
 import Web3 from 'web3';
 import LotteryContract from '../abis/LotteryContract.json';
 
+export enum GameStateEnum {
+  OPEN,
+  CLOSED,
+  PROCESSING_WINNERS,
+  PAYING_WINNERS,
+  PAYING_WINNERS_COMPLETED,
+}
 export class BlockchainService {
   private _window: any = window as any;
   private web3: Web3;
@@ -28,6 +35,8 @@ export class BlockchainService {
           LotteryContract.abi as any,
           (LotteryContract.networks as any)[netId].address,
         );
+
+        this.subscribeToWebWalletEvents();
       } catch (error) {
         throw new Error('could not connect to the blockchain');
       }
@@ -50,7 +59,29 @@ export class BlockchainService {
     }
   }
 
+  public async getCurrentGameId(): Promise<number> {
+    return await this.lotteryContract.methods.currentGameId().call();
+  }
+
+  public async getCurrentGameState(): Promise<GameStateEnum> {
+    return await this.lotteryContract.methods.gameState().call();
+  }
+
   public async startGame(): Promise<void> {
-    await this.lotteryContract.methods.startGame();
+    try {
+      return await this.lotteryContract.methods.startGame().send({ from: this.getCurrentAccountAddress() });
+      // .on('receipt', (receipt: any): void => {
+      //   // ideally rxjs/Subject would be pushing a boolean here, but just rushing through it for now to see the app working
+      //   console.log(receipt);
+      // });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private subscribeToWebWalletEvents(): void {
+    this._window.ethereum.on('accountsChanged', (): void => {
+      this._window.location.reload();
+    });
   }
 }

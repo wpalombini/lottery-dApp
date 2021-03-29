@@ -1,9 +1,10 @@
-const LotteryContract = artifacts.require("LotteryContract");
-const GovernanceContract = artifacts.require("GovernanceContract");
-const RandomnessContract = artifacts.require("RandomnessContract");
-const MockRandomnessContract = artifacts.require("MockRandomnessContract");
+const LotteryContract = artifacts.require('LotteryContract');
+const GovernanceContract = artifacts.require('GovernanceContract');
+const RandomnessContract = artifacts.require('RandomnessContract');
+const MockRandomnessContract = artifacts.require('MockRandomnessContract');
 
-const { LinkToken } = require("@chainlink/contracts/truffle/v0.4/LinkToken");
+const LinkTokenInterface = artifacts.require('LinkTokenInterface');
+const { LinkToken } = require('@chainlink/contracts/truffle/v0.4/LinkToken');
 
 module.exports = async (deployer, network, accounts) => {
   LinkToken.setProvider(deployer.provider);
@@ -20,11 +21,13 @@ module.exports = async (deployer, network, accounts) => {
 
     let randomnessContractDeployed;
 
-    if (network === "development") {
+    if (network === 'development') {
       // unit tests...
       // Deploy Mock Randomness Contract passing the LINK Token address and the GovernanceContract address
       await deployer.deploy(MockRandomnessContract, LinkToken.address, governanceContractDeployed.address);
       randomnessContractDeployed = await MockRandomnessContract.deployed();
+      const token = await LinkTokenInterface.at(LinkToken.address);
+      await token.transfer(randomnessContractDeployed.address, '1000000000000000000');
     } else {
       // testnet...
       // Deploy Randomness Contract passing the LINK Token address and the GovernanceContract address
