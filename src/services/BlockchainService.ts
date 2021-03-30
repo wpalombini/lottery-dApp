@@ -69,11 +69,19 @@ export class BlockchainService {
 
   public async startGame(): Promise<void> {
     try {
-      return await this.lotteryContract.methods.startGame().send({ from: this.getCurrentAccountAddress() });
+      await this.lotteryContract.methods.startGame().send({ from: this.getCurrentAccountAddress() });
       // .on('receipt', (receipt: any): void => {
       //   // ideally rxjs/Subject would be pushing a boolean here, but just rushing through it for now to see the app working
       //   console.log(receipt);
       // });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async drawNumbers(numbers: number): Promise<void> {
+    try {
+      await this.lotteryContract.methods.drawNumbers(numbers).send({ from: this.getCurrentAccountAddress() });
     } catch (error) {
       console.log(error);
     }
