@@ -10,6 +10,7 @@ export interface IAdminPage {
 const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Element => {
   const [canStartGame, setCanStartGame] = useState(true);
   const [canDrawNumbers, setCanDrawNumbers] = useState(false);
+  const [currentGameId, setCurrentGameId] = useState(0);
   const drawNumbersTxt = createRef<HTMLInputElement>();
 
   useEffect(() => {
@@ -30,6 +31,8 @@ const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Eleme
     // should be subscribing to an rxjs/Observable and gettig a boolean (game started sucessfully) from rxjs/Subject
     const currentGameState: GameStateEnum = await props.blockchainService.getCurrentGameState();
     if (currentGameState == GameStateEnum.OPEN) {
+      const currentGameId: number = await props.blockchainService.getCurrentGameId();
+      setCurrentGameId(currentGameId);
       setCanStartGame(false);
     }
   };
@@ -48,9 +51,8 @@ const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Eleme
   };
 
   const handleChangeNumbers: () => void = (): void => {
-    if (!canStartGame && drawNumbersTxt && drawNumbersTxt.current && drawNumbersTxt.current.value) {
-      const numbers = parseInt(drawNumbersTxt.current.value);
-      setCanDrawNumbers(numbers >= 0 && numbers <= 9999);
+    if (!canStartGame && drawNumbersTxt && drawNumbersTxt.current) {
+      setCanDrawNumbers(drawNumbersTxt.current.value.length === 4 && !isNaN(parseInt(drawNumbersTxt.current.value)));
     }
   };
 
@@ -68,8 +70,17 @@ const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Eleme
       }
       content={
         <Fragment>
-          <Typography variant="body1">Manage game:</Typography>
-          <TextField label="Result Numbers" type="number" inputRef={drawNumbersTxt} onChange={handleChangeNumbers} />
+          <Typography variant="h6">Manage game:</Typography>
+          <Typography variant="body1" style={{ visibility: canStartGame ? 'hidden' : 'visible' }}>
+            Current game Id: {currentGameId}
+          </Typography>
+          <TextField
+            label="Result Numbers"
+            type="number"
+            inputRef={drawNumbersTxt}
+            onChange={handleChangeNumbers}
+            style={{ visibility: canStartGame ? 'hidden' : 'visible' }}
+          />
         </Fragment>
       }
     />
