@@ -67,6 +67,11 @@ export class BlockchainService {
     return await this.lotteryContract.methods.gameState().call();
   }
 
+  public async getTotalBetsAmount(gameId: number): Promise<string> {
+    const game = await this.lotteryContract.methods.games(gameId).call();
+    return this.web3.utils.fromWei(game.totalBetAmount, 'Gwei');
+  }
+
   public async startGame(): Promise<void> {
     try {
       await this.lotteryContract.methods.startGame().send({ from: this.getCurrentAccountAddress() });

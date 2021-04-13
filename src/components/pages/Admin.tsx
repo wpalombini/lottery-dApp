@@ -11,30 +11,29 @@ const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Eleme
   const [canStartGame, setCanStartGame] = useState(true);
   const [canDrawNumbers, setCanDrawNumbers] = useState(false);
   const [currentGameId, setCurrentGameId] = useState(0);
+  const [totalBetsAmount, setTotalBetsAmount] = useState('');
   const drawNumbersTxt = createRef<HTMLInputElement>();
 
   useEffect(() => {
-    const getCurrentGameState: () => Promise<void> = async (): Promise<void> => {
-      const currentGameState: GameStateEnum = await props.blockchainService.getCurrentGameState();
-
-      if (currentGameState == GameStateEnum.OPEN) {
-        setCanStartGame(false);
-      }
-    };
-
-    getCurrentGameState();
+    setCurrentGameState();
   }, []);
+
+  const setCurrentGameState: () => Promise<void> = async (): Promise<void> => {
+    const currentGameState: GameStateEnum = await props.blockchainService.getCurrentGameState();
+
+    if (currentGameState == GameStateEnum.OPEN) {
+      const currentGameId: number = await props.blockchainService.getCurrentGameId();
+      const totalBetsAmount: string = await props.blockchainService.getTotalBetsAmount(currentGameId);
+      setCurrentGameId(currentGameId);
+      setTotalBetsAmount(totalBetsAmount);
+      setCanStartGame(false);
+    }
+  };
 
   const startNewGame: () => Promise<void> = async (): Promise<void> => {
     await props.blockchainService.startGame();
 
-    // should be subscribing to an rxjs/Observable and gettig a boolean (game started sucessfully) from rxjs/Subject
-    const currentGameState: GameStateEnum = await props.blockchainService.getCurrentGameState();
-    if (currentGameState == GameStateEnum.OPEN) {
-      const currentGameId: number = await props.blockchainService.getCurrentGameId();
-      setCurrentGameId(currentGameId);
-      setCanStartGame(false);
-    }
+    setCurrentGameState();
   };
 
   const drawNumbers: () => Promise<void> = async (): Promise<void> => {
@@ -72,7 +71,10 @@ const Admin: (props: IAdminPage) => JSX.Element = (props: IAdminPage): JSX.Eleme
         <Fragment>
           <Typography variant="h6">Manage game:</Typography>
           <Typography variant="body1" style={{ visibility: canStartGame ? 'hidden' : 'visible' }}>
-            Current game Id: {currentGameId}
+            <b>Current game Id</b>: {currentGameId}
+          </Typography>
+          <Typography variant="body1" style={{ visibility: canStartGame ? 'hidden' : 'visible' }}>
+            <b>Total bets amount</b>: {totalBetsAmount} Gwei
           </Typography>
           <TextField
             label="Result Numbers"
