@@ -92,6 +92,21 @@ export class BlockchainService {
     }
   }
 
+  public async placeBet(n1: number, n2: number, n3: number, n4: number): Promise<void> {
+    try {
+      const bettingPrice: number = await this.getBettingPrice();
+      await this.lotteryContract.methods
+        .placeBet(n1, n2, n3, n4)
+        .send({ from: this.getCurrentAccountAddress(), value: bettingPrice });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private async getBettingPrice(): Promise<number> {
+    return await this.lotteryContract.methods.bettingPrice().call();
+  }
+
   private subscribeToWebWalletEvents(): void {
     this._window.ethereum.on('accountsChanged', (): void => {
       this._window.location.reload();
