@@ -260,10 +260,10 @@ contract('LotteryContract', (accounts) => {
       const totalPlayers = 10;
       const totalWinners = 7;
 
-      const totalBetAmount = totalPlayers * bettingPrice;
-      const profit = (totalBetAmount * 10) / 100; // 10%
-      const payablePrize = totalBetAmount - profit;
-      const individualPayablePrize = Math.trunc(payablePrize / totalWinners);
+      const totalBetAmount = toBN(totalPlayers).mul(toBN(bettingPrice));
+      const profit = totalBetAmount.mul(toBN(10)).div(toBN(100)); // 10%
+      const payablePrize = totalBetAmount.sub(profit);
+      const individualPayablePrize = payablePrize.divRound(toBN(totalWinners));
 
       const randomNumber = 123456789;
       const initialContractBalance = new BN(await lotteryContract.getBalance());

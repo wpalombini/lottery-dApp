@@ -21,7 +21,7 @@ contract LotteryContract {
 
     GameStateEnum public gameState = GameStateEnum.CLOSED;
     
-    uint256 public bettingPrice = 10000;
+    uint256 public bettingPrice = 1000000000000000000;
     
     address payable admin;
     
