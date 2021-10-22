@@ -8,9 +8,9 @@ import About from '../pages/About';
 import Home from '../pages/Home';
 import NavBar from './NavBar';
 import SideMenu, { IListItem } from './SideMenu';
-import { AttachMoney, Build, House, Info } from '@material-ui/icons';
+import { AttachMoney, Build, House, Info } from '@mui/icons-material';
 import Games from '../pages/Games';
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import Admin from '../pages/Admin';
 
 export class BlockchainStateModel {

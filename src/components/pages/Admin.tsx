@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button, TextField, Typography } from '@mui/material';
 import React, { createRef, Fragment, useEffect, useState } from 'react';
 import { BlockchainService, GameStateEnum } from '../../services/BlockchainService';
 import LotteryCard from '../Card';

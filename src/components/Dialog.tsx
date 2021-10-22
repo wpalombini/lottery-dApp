@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Dialog, DialogContent } from '@mui/material';
 
 export interface IDialogProps {
   content: JSX.Element | null;
@@ -8,17 +8,7 @@ export interface IDialogProps {
   onClose: (value: string) => void;
 }
 
-const useStyles = makeStyles({
-  root: {
-    padding: 0,
-    '&:first-child': {
-      paddingTop: 0,
-    },
-  },
-});
-
 const LotteryDialog: (props: IDialogProps) => JSX.Element = (props: IDialogProps): JSX.Element => {
-  const classes = useStyles();
   const { onClose, selectedValue, isOpen } = props;
 
   const handleClose = () => {
@@ -27,7 +17,16 @@ const LotteryDialog: (props: IDialogProps) => JSX.Element = (props: IDialogProps
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={isOpen}>
-      <DialogContent className={classes.root}>{props.content}</DialogContent>
+      <DialogContent
+        sx={{
+          padding: 0,
+          '&:first-of-type': {
+            paddingTop: 0,
+          },
+        }}
+      >
+        {props.content}
+      </DialogContent>
     </Dialog>
   );
 };

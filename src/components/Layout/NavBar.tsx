@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { styled } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import { BlockchainStateModel } from './Layout';
 import LotteryCard from '../Card';
 import { Link } from 'react-router-dom';
@@ -18,23 +18,15 @@ export interface INavBarProps {
   onMenuClicked: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
+const DivContainerStyled = styled('div')(
+  // eslint-disable-next-line
+  ({ theme }) =>
+    `
+  flex-grow: 1
+`,
 );
 
 const NavBar: (props: INavBarProps) => JSX.Element = (props: INavBarProps): JSX.Element => {
-  const classes = useStyles();
-
   useEffect(() => {
     const getBalance: () => Promise<void> = async (): Promise<void> => {
       if (props.blockchain.isConnected) {
@@ -78,25 +70,25 @@ const NavBar: (props: INavBarProps) => JSX.Element = (props: INavBarProps): JSX.
   );
 
   return (
-    <div className={classes.root}>
+    <DivContainerStyled>
       <AppBar position="static">
         <Toolbar>
           <IconButton
             onClick={props.onMenuClicked}
             edge="start"
-            className={classes.menuButton}
+            sx={{ marginRight: (theme) => theme.spacing(2) }}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <Link to="/">Lottery dApp</Link>
           </Typography>
           {balanceContainer}
         </Toolbar>
       </AppBar>
-    </div>
+    </DivContainerStyled>
   );
 };
 
